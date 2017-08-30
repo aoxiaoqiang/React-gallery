@@ -1,0 +1,160 @@
+@font-face {
+  font-family: "iconfont";
+  src: url('../fonts/icons/iconfont.eot?t=1503760617979'); /* IE9*/
+  src: url('../fonts/icons/iconfont.eot?t=1503760617979#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../fonts/icons/iconfont.woff?t=1503760617979') format('woff'), /* chrome, firefox */
+  url('../fonts/icons/iconfont.ttf?t=1503760617979') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('../fonts/icons/iconfont.svg?t=1503760617979#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+@mixin dis_whole{
+  width: 100%;
+  height: 100%;
+}
+
+/* Base Application Styles */
+html, body {
+  @include dis_whole;
+  background: #222;
+}
+
+.content{
+  @include dis_whole;
+}
+
+
+/* stage -- start */
+.stage{
+  position: relative;
+  @include dis_whole;
+}
+/* stage -- end */
+
+/* image -- start */
+.img-sec{
+  position: relative;
+  @include dis_whole;
+  overflow: hidden;
+  background-color: #ddd;
+  perspective: 1800px;
+
+  @at-root{
+    .img-figure{
+      position: absolute;
+      width: 300px;
+      height: 240px;
+
+      margin: 0;
+      padding: 30px;
+
+      background-color: #fff;
+
+      box-sizing: border-box;
+      box-shadow: 0 2px 10px #999;
+
+      cursor: pointer;
+
+      transform-origin: 0  0;
+      transform-style: preserve-3d;
+      transition: transform .6s ease-in-out, left .6s ease-in-out, top .6s ease-in-out;
+
+      &.is-inverse{
+        transform: translateX(300px) rotateY(180deg);
+      }
+
+      img{
+        display: block;
+        width: 100%;
+      }
+
+
+    }
+
+    figcaption{
+      text-align: center;
+
+      .img-title{
+        margin-top: 20px;
+
+        color: #a7a0a2;
+        font-size: 16px;
+      }
+
+      .img-back {
+        position: absolute;
+        top:0;
+        left: 0;
+
+        @include dis_whole;
+        padding: 20px 30px;
+        overflow: auto;
+
+        color:#a7a0a2;
+        font-size: 13px;
+        line-height: 1.25;
+        text-align: left;
+        background-color: #fff;
+
+        box-sizing: border-box;
+
+        /*先开始时.img-back，旋转了180度，因为translateZ(1px)，位于正面图像的下方*/
+        /*当.img-figure旋转时，.img-back又旋转了180度，旋转度数为360,因为translateZ(1px)，位于正面图像的上方*/
+        transform: rotateY(180deg) translateZ(1px);
+      }
+    }
+  }
+}
+/* image -- end */
+
+
+/* nav -- start */
+.controller-nav{
+  position: absolute;
+  left: 0;
+  bottom: 30px;
+
+  width: 100%;
+
+  z-index: 99;
+
+  text-align: center;
+
+  @at-root{
+    .controller-unit{
+      margin: 0 5px;
+
+      display: inline-block;
+      height: 30px;
+      width: 30px;
+
+      line-height: 30px;
+      text-align: center;
+      background: #aaa;
+      border-radius: 50%;
+      transform: scale(.5);
+      cursor: pointer;
+      vertical-align: middle;
+      transition: transform .5s ease-in-out;
+      &.is-center{
+        transform: scale(1);
+        background: #999;
+
+        &::after{
+          font-family:"iconfont" !important;
+          font-size:20px;
+          font-style:normal;
+          content: "\e675";
+          color: #fff;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+      }
+
+      &.is-inverse{
+        background: #555;
+        transform: rotateY(180deg);
+      }
+    }
+  }
+}
+/* nav -- end */
